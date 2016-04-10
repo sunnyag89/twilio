@@ -9,14 +9,13 @@ app.config.from_object(__name__)
  
  
 @app.route("/", methods=['GET', 'POST'])
-def hello_monkey():
-    """Respond with the number of text messages sent between two parties."""
+def getStockInfo():
     messageBody = request.values.get('Body')
     try:
       """Splitting the text input into action and ticker"""
       actionMessage = messageBody.split(" ")[0]
       stockTicker = messageBody.split(" ")[1].upper()
-      """Using the yahoo api to respond to user requests"""
+      """Using the Yahoo api to respond to user requests"""
       stock = Share(stockTicker)
       if actionMessage.upper() == "QUOTE":
         message = "Last Trading Price: "+ stock.get_price()
